@@ -59,12 +59,12 @@ export default function TextFormPlus(props) {
           rows="8"
         />
         <div className="btn-group mb-2">
-          <button className="btn btn-primary mx-1" onClick={handleUpClick}>Uppercase</button>
-          <button className="btn btn-primary mx-1" onClick={handleLoClick}>Lowercase</button>
-          <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear</button>
-          <button className="btn btn-primary mx-1" onClick={handleCopyClick}>Copy</button>
-          <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Spaces</button>
-          <button className="btn btn-primary mx-1" onClick={handleCapitalize}>Capitalize</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Uppercase</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Lowercase</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Spaces</button>
+          <button className="btn btn-primary mx-1 my-1" onClick={handleCapitalize}>Capitalize</button>
         </div>
       </div>
 
