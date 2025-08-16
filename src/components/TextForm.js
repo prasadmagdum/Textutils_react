@@ -19,6 +19,7 @@ export default function TextFormPlus(props) {
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied to clipboard", "success");
   };
 
@@ -46,7 +47,7 @@ export default function TextFormPlus(props) {
   return (
     <>
       <div className="container" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
-        <h1>{props.heading}</h1>
+        <h1 className="my-4">{props.heading}</h1>
         <textarea
           className="form-control mb-3"
           value={text}
@@ -58,12 +59,12 @@ export default function TextFormPlus(props) {
           rows="8"
         />
         <div className="btn-group mb-2">
-          <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Uppercase</button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Lowercase</button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear</button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Spaces</button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleCapitalize}>Capitalize</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Uppercase</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Lowercase</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Spaces</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCapitalize}>Capitalize</button>
         </div>
       </div>
 
