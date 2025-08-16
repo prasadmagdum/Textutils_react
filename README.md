@@ -10,4 +10,4 @@ It provides features like changing text case, removing spaces, copying text, and
 - Word and Character Count
 - Reading Time Estimate
 - Light/Dark Mode
-![image alt](Screenshot 2025-08-16 133346.png)
+![image alt](https://github.com/prasadmagdum/Textutils_react/blob/245a0fb1b074b35d9063f33c71178f86a69a55c9/Screenshot%202025-08-16%20133346.png)
