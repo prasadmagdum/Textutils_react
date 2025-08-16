@@ -10,3 +10,4 @@ It provides features like changing text case, removing spaces, copying text, and
 - Word and Character Count
 - Reading Time Estimate
 - Light/Dark Mode
+![image alt]( )
