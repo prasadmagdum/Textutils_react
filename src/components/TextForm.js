@@ -1,53 +1,31 @@
 import React, { useState } from 'react';
-export default function TextFormPlus(props) {
+
+export default function TextForm(props) {
   const [text, setText] = useState('');
 
-  const handleUpClick = () => {
-    setText(text.toUpperCase());
-    props.showAlert("Converted to uppercase", "success");
-  };
-
-  const handleLoClick = () => {
-    setText(text.toLowerCase());
-    props.showAlert("Converted to lowercase", "success");
-  };
-
-  const handleClearClick = () => {
-    setText('');
-    props.showAlert("Text cleared", "success");
-  };
-
+  const handleUpClick = () => setText(text.toUpperCase());
+  const handleLoClick = () => setText(text.toLowerCase());
+  const handleClearClick = () => setText('');
   const handleCopyClick = () => {
     navigator.clipboard.writeText(text);
-    document.getSelection().removeAllRanges();
-    props.showAlert("Copied to clipboard", "success");
+    props.showAlert("Copied to Clipboard!", "success");
   };
+  const handleExtraSpaces = () => setText(text.split(/[ ]+/).join(" "));
+  const handleCapitalize = () =>
+    setText(text.replace(/\b\w/g, char => char.toUpperCase()));
 
-  const handleExtraSpaces = () => {
-    setText(text.split(/\s+/).join(' '));
-    props.showAlert("Extra spaces removed", "success");
-  };
-
-  const handleCapitalize = () => {
-    const newText = text
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-    setText(newText);
-    props.showAlert("Text capitalized", "success");
-  };
-
-  const handleOnChange = (event) => {
-    setText(event.target.value);
-  };
-
-  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+  const handleOnChange = (event) => setText(event.target.value);
 
   return (
     <>
-      <div className="container" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
-        <h1 className="my-4">{props.heading}</h1>
+      <div
+        className="container my-3"
+        style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}
+      >
+        <h2 className="mb-3">
+          {props.heading}
+        </h2>
+
         <textarea
           className="form-control mb-3"
           value={text}
@@ -57,24 +35,26 @@ export default function TextFormPlus(props) {
             color: props.mode === 'dark' ? 'white' : '#042743'
           }}
           rows="8"
-        />
-        <div className="btn-group mb-2">
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Uppercase</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Lowercase</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Spaces</button>
-          <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCapitalize}>Capitalize</button>
-        </div>
-      </div>
+          placeholder="Enter your text here..."
+        ></textarea>
 
-      <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
-        <h2>Text Summary</h2>
-        <p>{wordCount} words and {text.length} characters</p>
-        <p>{(0.008 * wordCount).toFixed(2)} minutes to read</p>
-        {text.length > 200 && <p className="text-danger">⚠️ Character limit exceeded (200)</p>}
-        <h2>Preview</h2>
-        <p>{text || "Nothing to preview!"}</p>
+        {/* Responsive buttons */}
+        <div className="d-flex flex-wrap gap-2 mb-3">
+          <button disabled={!text} className="btn btn-primary" onClick={handleUpClick}>Uppercase</button>
+          <button disabled={!text} className="btn btn-primary" onClick={handleLoClick}>Lowercase</button>
+          <button disabled={!text} className="btn btn-primary" onClick={handleClearClick}>Clear</button>
+          <button disabled={!text} className="btn btn-primary" onClick={handleCopyClick}>Copy</button>
+          <button disabled={!text} className="btn btn-primary" onClick={handleExtraSpaces}>Remove Spaces</button>
+          <button disabled={!text} className="btn btn-primary" onClick={handleCapitalize}>Capitalize</button>
+        </div>
+
+        <div className="mt-3">
+          <h4>Your Text Summary</h4>
+          <p>{text.split(/\s+/).filter(word => word.length !== 0).length} words and {text.length} characters</p>
+          <p>{0.008 * text.split(/\s+/).filter(word => word.length !== 0).length} Minutes read</p>
+          <h5>Preview</h5>
+          <p>{text.length > 0 ? text : "Nothing to preview!"}</p>
+        </div>
       </div>
     </>
   );
